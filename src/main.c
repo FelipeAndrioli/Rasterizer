@@ -61,14 +61,17 @@ void fill_triangle(vec2_t v0, vec2_t v1, vec2_t v2, uint32_t color) {
     int x_max = MAX(MAX(v0.x, v1.x), v2.x);
     int y_max = MAX(MAX(v0.y, v1.y), v2.y);
 
+    int bias0 = is_top_left(&v1, &v2) ? 0 : -1;
+    int bias1 = is_top_left(&v2, &v0) ? 0 : -1;
+    int bias2 = is_top_left(&v0, &v1) ? 0 : -1;
 
     for (int y = y_min; y <= y_max; y++) {
         for (int x = x_min; x <= x_max; x++) {
             vec2_t p = {x, y};
 
-            int w0 = edge_cross(&v1, &v2, &p);
-            int w1 = edge_cross(&v2, &v0, &p);
-            int w2 = edge_cross(&v0, &v1, &p);
+            int w0 = edge_cross(&v1, &v2, &p) + bias0;
+            int w1 = edge_cross(&v2, &v0, &p) + bias1;
+            int w2 = edge_cross(&v0, &v1, &p) + bias2;
 
             bool is_inside = w0 >= 0 && w1 >= 0 && w2 >= 0;
 
