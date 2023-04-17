@@ -13,7 +13,7 @@ bool create_window(void) {
         return false;
     }
 
-    window = SDL_CreateWindow("Rasterizer.exe", SDL_WINDOWPOS_CENTERED, 
+    window = SDL_CreateWindow("triangle_rasterizer.exe", SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, window_width, window_height, 0);
 
     if (!window) {
