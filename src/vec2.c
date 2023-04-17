@@ -41,3 +41,16 @@ void vec2_normalize(vec2_t *v) {
     v->x /= mag;
     v->y /= mag;
 }
+
+vec2_t vec2_rotate(vec2_t v, vec2_t center, float angle) {
+    vec2_t rotation;
+
+    v.x -= center.x;
+    v.y -= center.y;
+    rotation.x = v.x * cos(angle) - v.y * sin(angle);
+    rotation.y = v.x * sin(angle) + v.y * cos(angle);
+    rotation.x += center.x;
+    rotation.y += center.y;
+
+    return rotation;
+}
